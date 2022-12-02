@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="closeButtonVisible"
+            type="Boolean" />
+
+        <variable
+            name="iconDrawable"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="title"
+            type="CharSequence" />
+
+        <variable
+            name="message"
+            type="CharSequence" />
+
+        <variable
+            name="input"
+            type="CharSequence" />
+
+        <variable
+            name="hasInputField"
+            type="Boolean" />
+
+        <variable
+            name="confirmText"
+            type="CharSequence" />
+
+        <variable
+            name="dangerText"
+            type="CharSequence" />
+
+        <variable
+            name="neutralText"
+            type="CharSequence" />
+
+        <variable
+            name="closeButtonClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="confirmClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="dangerClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="neutralClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet_dialog_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_bottom_sheet_dialog"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:onClickListener="@{closeButtonClickListener}"
+            android:src="@drawable/bottom_sheet_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{closeButtonVisible}"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/bottom_sheet_dialog_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{iconDrawable}"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_sheet_dialog_end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/bottom_sheet_dialog_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_top_guideline"
+            app:visible="@{iconDrawable != null}"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/error" />
+
+        <TextView
+            android:id="@+id/bottom_sheet_dialog_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/font_bold"
+            android:text="@{title}"
+            android:textColor="@color/telenetColorOnSurface"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_sheet_dialog_end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/bottom_sheet_dialog_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_icon"
+            app:visible="@{title != null}"
+            tools:text="Esqueci minha senha" />
+
+        <TextView
+            android:id="@+id/bottom_sheet_dialog_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/font_regular"
+            android:text="@{message}"
+            android:textColor="@color/telenetColorOnSurface"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_sheet_dialog_end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/bottom_sheet_dialog_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_title"
+            app:layout_goneMarginTop="16dp"
+            app:visible="@{message != null}"
+            tools:text="Caso você tenha esquecido sua senha e precisa de ajuda, entre em contato com a nossa central de atendimento." />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bottom_sheet_dialog_input"
+                style="@style/AppTheme.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                app:layout_constraintEnd_toStartOf="@+id/bottom_sheet_dialog_end_guideline"
+                app:layout_constraintStart_toEndOf="@+id/bottom_sheet_dialog_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_message"
+                app:layout_constraintVertical_bias="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword"
+                    android:maxLength="8"
+                    android:textColor="@color/black"
+                    app:visible="@{hasInputField}"
+                    android:text="@={input}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/bottomSheetNeutralButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_neutral_enabled"
+            android:onClickListener="@{neutralClickListener}"
+            android:text="@{neutralText}"
+            android:textAllCaps="false"
+            android:textColor="@color/button_neutral_text"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_dialog_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/bottomSheetConfirmButton"
+            app:layout_constraintStart_toStartOf="@+id/bottom_sheet_dialog_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_input"
+            app:layout_constraintVertical_bias="0"
+            app:layout_goneMarginEnd="16dp"
+            app:visible="@{neutralText != null}"
+            tools:text="Fechar" />
+
+        <Button
+            android:id="@+id/bottomSheetConfirmButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_client"
+            android:onClickListener="@{confirmClickListener}"
+            android:text="@{confirmText}"
+            android:textAllCaps="false"
+            android:textColor="@color/button_client"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_dialog_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/bottomSheetDangerButton"
+            app:layout_constraintStart_toEndOf="@+id/bottomSheetNeutralButton"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_input"
+            app:layout_constraintVertical_bias="0"
+            app:layout_goneMarginStart="0dp"
+            app:visible="@{confirmText != null}"
+            tools:text="Fechar" />
+
+        <Button
+            android:id="@+id/bottomSheetDangerButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_danger"
+            android:onClickListener="@{dangerClickListener}"
+            android:text="@{dangerText}"
+            android:textAllCaps="false"
+            android:textColor="@color/button_danger"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_sheet_dialog_bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@+id/bottom_sheet_dialog_end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/bottomSheetConfirmButton"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_dialog_input"
+            app:layout_constraintVertical_bias="0"
+            app:layout_goneMarginStart="0dp"
+            app:visible="@{dangerText != null}"
+            tools:text="Cancelar" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_sheet_dialog_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_sheet_dialog_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_sheet_dialog_top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="40dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_sheet_dialog_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="32dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

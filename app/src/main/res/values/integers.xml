@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="client_button_angle">0</integer>
+
+    <!-- Initialization -->
+    <integer name="cnpj_lenght">14</integer>
+    <integer name="cpf_length">11</integer>
+    <integer name="terminal_length">8</integer>
+
+</resources>

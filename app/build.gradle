@@ -1,0 +1,199 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf'
+
+android {
+    defaultConfig {
+        applicationId "br.com.tln.personalcard.credenciador"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        compileSdkVersion build_versions.compile_sdk
+        versionCode 3
+        versionName "3.0"
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.jks')
+            storePassword '4K@EQV6bBL7aDe*a'
+            keyAlias 't3len3tCr3DenC1ad0ppaD3bu9'
+            keyPassword 'IE%Rl#z04JZiyiko'
+        }
+        release {
+            storeFile file('release.jks')
+            storePassword '9v!#h&32aZJrDrFfOr3zVCVa9#8ivjhl'
+            keyAlias 't3Len3tCr3DenC1ad0ppaR3l3a53'
+            keyPassword '7bq&uvzBbF$tp9Fik&Q2%boYXDr!P^Tm'
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            manifestPlaceholders = [crashlyticsEnabled: true]
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [crashlyticsEnabled: true]
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.buildConfigField "String", "DEFAULT_CRYPTOGRAPHY_TRANSFORMATION", "\"AES/CBC/PKCS7Padding\""
+        variant.buildConfigField "String", "DEFAULT_CRYPTOGRAPHY_ALGORITHM", "\"AES\""
+        variant.buildConfigField "String", "DEFAULT_CRYPTOGRAPHY_KEY", "\"68gs%@tswsb887&z\""
+        variant.buildConfigField "String", "DEFAULT_CRYPTOGRAPHY_INITIALIZATION_VECTOR", "\"i972ud0sb7*03&j1\""
+    }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+        dev {
+            dimension "environment"
+
+            buildConfigField "String", "API_BASE_URL", "\"https://www3.tln.com.br/\""
+            buildConfigField "String", "APPLICATION_KEY", "\"BCD59A65-7AEF-4C0D-92EE-8989F510E659:530_485+Dd-8af8B@@\\\\9CE9/EF7Aqq250763\""
+            buildConfigField "String", "USER_APPLICATION_KEY", "\"99E8D11D-8502-4CF4-BA31-B84A1576E51B:530_485+Dd-8af8B@@\\\\9CE9/EF7Aqq250763\""
+            buildConfigField "String", "OPERATOR_CODE", "\"0030\""
+            resValue "string", "welcome_message_clickable_text", "0800 003 8400"
+
+            def FILE_PROVIDER = 'telenetfileproviderauthority.tln.personalcard.credenciado.dev'
+
+            manifestPlaceholders = [fileProviderAuthorities: FILE_PROVIDER]
+            buildConfigField "String", "FILE_PROVIDER_AUTHORITY", "\"$FILE_PROVIDER\""
+
+            applicationIdSuffix '.dev'
+        }
+        prod {
+            dimension "environment"
+
+            buildConfigField "String", "API_BASE_URL", "\"https://www1.tln.com.br/\""
+            buildConfigField "String", "APPLICATION_KEY", "\"BCD59A65-7AEF-4C0D-92EE-8989F510E659:530_485+Dd-8af8B@@\\\\9CE9/EF7Aqq250763\""
+            buildConfigField "String", "USER_APPLICATION_KEY", "\"99E8D11D-8502-4CF4-BA31-B84A1576E51B:530_485+Dd-8af8B@@\\\\9CE9/EF7Aqq250763\""
+            buildConfigField "String", "OPERATOR_CODE", "\"0030\""
+            resValue "string", "welcome_message_clickable_text", "0800 003 8400"
+
+            def FILE_PROVIDER = 'telenetfileproviderauthority.tln.personalcard.credenciado.prd'
+
+            manifestPlaceholders = [fileProviderAuthorities: FILE_PROVIDER]
+            buildConfigField "String", "FILE_PROVIDER_AUTHORITY", "\"$FILE_PROVIDER\""
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.play_services_basement
+
+    /* Kotlin */
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin.coroutines_core
+    implementation deps.kotlin.coroutines_android
+
+    /* Crash Reporting */
+    implementation(deps.crashlytics) {
+        transitive = true
+    }
+
+    /* DateTime */
+    implementation deps.threetenabp
+
+    /* Timber */
+    implementation deps.timber
+
+    /* Firebase */
+    implementation deps.firebase.core
+    implementation deps.firebase.analytics
+    implementation deps.firebase.cloud_messaging
+    implementation deps.firebase.performance_monitor
+
+    /* Android KTX */
+    implementation deps.ktx.core
+
+    /* Androidx */
+    implementation deps.androidx.app_compat
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.browser
+
+    /* Material Components */
+    implementation deps.material_components.core
+
+    /* Constraint Layout */
+    implementation deps.constraint_layout.core
+
+    /* Room */
+    implementation deps.room.runtime
+    implementation deps.room.migration
+    kapt deps.room.compiler
+
+    /* Paging */
+    implementation deps.paging.runtime
+
+    /* Navigation */
+    implementation deps.navigation.fragment
+    implementation deps.navigation.ui
+
+    /* Lifecycle */
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.java8
+    implementation deps.lifecycle.viewmodel
+    kapt deps.lifecycle.compiler
+
+    /* Glide */
+    implementation deps.glide.runtime
+    kapt deps.glide.compiler
+
+    /* Dagger */
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
+    /* Moshi */
+    implementation deps.moshi.runtime
+    kapt deps.moshi.codegen
+
+    /* OkHttp */
+    implementation deps.ok_http.runtime
+    implementation deps.ok_http.logging_interceptor
+
+    /* Retrofit */
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+
+    /* Arrow */
+    implementation deps.arrow.core
+
+    /* Mask */
+    implementation deps.inputmask
+
+    /* Dev Utilities */
+    debugImplementation deps.dev.debugDb
+
+    /* Top Snackbar */
+    implementation deps.topsnackbar
+}
+
+apply plugin: 'com.google.gms.google-services'

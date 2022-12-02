@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemTransactionsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/transactions_container"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/transactions_end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/transactions_start_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+        <TextView
+            android:id="@+id/itemTransactionsWeekDayMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_regular"
+            android:textColor="@color/telenetColorExtra4"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/itemTransactionsValue"
+            app:layout_constraintStart_toStartOf="@+id/item_transactions_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_top_guideline"
+            tools:text="31 JUL" />
+
+        <TextView
+            android:id="@+id/itemTransactionsValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/font_regular"
+            android:gravity="end"
+            android:textColor="@color/telenetColorExtra4"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/itemTransactionsWeekDayMonth"
+            app:layout_constraintEnd_toStartOf="@id/itemTransactionsChevron"
+            app:layout_constraintStart_toEndOf="@+id/itemTransactionsWeekDayMonth"
+            tools:text="R$ 113,45" />
+
+        <TextView
+            android:id="@+id/itemTransactionsWeekDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/font_regular"
+            android:textColor="@color/telenetColorExtra3"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_transactions_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@id/itemTransactionsChevron"
+            app:layout_constraintStart_toStartOf="@+id/itemTransactionsWeekDayMonth"
+            app:layout_constraintTop_toBottomOf="@+id/itemTransactionsWeekDayMonth"
+            tools:text="Terça" />
+
+        <ImageView
+            android:id="@+id/itemTransactionsChevron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chevron"
+            app:layout_constraintBottom_toBottomOf="@+id/item_transactions_bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@id/item_transactions_end_guideline"
+            app:layout_constraintTop_toTopOf="@+id/item_transactions_top_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

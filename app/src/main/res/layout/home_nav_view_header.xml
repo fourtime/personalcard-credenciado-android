@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.home.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/telenetColorBackground">
+
+        <ImageView
+            android:id="@+id/terminalLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rede_credenciada"
+            app:layout_constraintBottom_toBottomOf="@+id/nav_header_bottom_guideline"
+            app:layout_constraintStart_toStartOf="@+id/nav_header_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header_top_guideline"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/terminalName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/font_bold"
+            android:maxLines="2"
+            android:text="@{viewModel.terminalBusinessName}"
+            android:textColor="@color/telenetColorOnBackground"
+            app:autoSizeMaxTextSize="13sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toStartOf="@+id/nav_header_end_guideline"
+            app:layout_constraintStart_toEndOf="@+id/terminalLogo"
+            app:layout_constraintTop_toBottomOf="@+id/nav_header_top_guideline"
+            tools:text="Sabor do cerrado" />
+
+        <TextView
+            android:id="@+id/terminalCnpj"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/font_regular"
+            android:maxLines="1"
+            android:text="@{viewModel.terminalCnpj}"
+            android:textColor="@color/telenetColorOnBackground"
+            app:autoSizeMaxTextSize="12sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/terminalName"
+            app:layout_constraintStart_toStartOf="@+id/terminalName"
+            app:layout_constraintTop_toBottomOf="@+id/terminalName"
+            app:mask="@{viewModel.mask}"
+            tools:text="07.991.403/0001-99" />
+
+        <TextView
+            android:id="@+id/terminalNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/font_regular"
+            android:maxLines="1"
+            android:text="@{@string/home_nav_header_terminal_number_format(viewModel.terminalNumber)}"
+            android:textColor="@color/telenetColorOnBackground"
+            app:autoSizeMaxTextSize="12sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/nav_header_bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@+id/terminalName"
+            app:layout_constraintStart_toStartOf="@+id/terminalName"
+            app:layout_constraintTop_toBottomOf="@+id/terminalCnpj"
+            app:layout_constraintVertical_bias="0"
+            tools:text="Terminal: 49586493" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/nav_header_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/nav_header_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/nav_header_top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="40dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/nav_header_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="32dp" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/telenetColorDividerOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

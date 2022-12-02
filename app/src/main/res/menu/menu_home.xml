@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_transactions"
+            android:checkable="false"
+            android:icon="@drawable/home_menu_transactions"
+            android:title="@string/home_nav_transactions" />
+        <item
+            android:id="@+id/nav_support"
+            android:checkable="false"
+            android:icon="@drawable/home_menu_support"
+            android:title="@string/home_nav_support" />
+        <item
+            android:id="@+id/nav_change_password"
+            android:checkable="false"
+            android:icon="@drawable/home_menu_transactions"
+            android:title="@string/home_nav_change_password" />
+        <item
+            android:id="@+id/nav_exit"
+            android:checkable="false"
+            android:icon="@drawable/home_nav_exit"
+            android:title="@string/home_nav_exit" />
+    </group>
+</menu>

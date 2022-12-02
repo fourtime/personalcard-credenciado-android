@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.welcome.WelcomeViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorSurface">
+
+            <ImageView
+                android:id="@+id/welcomeLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="105dp"
+                android:src="@drawable/logo_welcome"
+                app:layout_constraintEnd_toEndOf="@+id/welcome_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/welcome_start_guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/welcomeTitle"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="center_vertical"
+                android:text="@string/welcome_title"
+                android:textColor="@color/telenetColorOnBackground"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toEndOf="@+id/welcome_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/welcome_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeLogo" />
+
+            <TextView
+                android:id="@+id/welcomeMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="top"
+                android:letterSpacing="-0.02"
+                android:lineSpacingExtra="3sp"
+                android:translationY="-1.28sp"
+                android:text="@{@string/welcome_message(@string/welcome_message_clickable_text)}"
+                android:textColor="@color/telenetColorOnBackground"
+                android:textSize="16sp"
+                app:emphasisText='@{@string/welcome_message_clickable_text}'
+                app:emphasisTextColor="@{@color/telenetColorPrimary}"
+                app:emphasisTextUnderline="@{false}"
+                app:layout_constraintEnd_toEndOf="@+id/welcome_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/welcome_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeTitle"
+                tools:text="@string/welcome_message" />
+
+            <Button
+                android:id="@+id/welcomeContinue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/button_client"
+                android:fontFamily="@font/font_regular"
+                android:onClick="@{() -> viewModel.continueClicked()}"
+                android:text="@string/welcome_continue"
+                android:textAllCaps="false"
+                android:textColor="@color/button_client"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/welcome_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/welcome_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/welcome_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/welcome_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

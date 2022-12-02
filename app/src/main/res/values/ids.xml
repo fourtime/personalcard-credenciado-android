@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="clickDelay" type="id"/>
+    <item name="maskOriginalText" type="id"/>
+    <item name="editTextMask" type="id"/>
+    <item name="editTextMaskListener" type="id"/>
+    <item name="editTextMaskRawText" type="id"/>
+
+    <!-- EditText Mask-->
+    <item name="editTextConditionalMask" type="id" />
+    <item name="editTextConditionalMasks" type="id" />
+    <item name="editTextMaskMaskedText" type="id" />
+
+    <!-- TextView Mask-->
+    <item name="textViewMask" type="id" />
+    <item name="textViewMaskRawText" type="id" />
+
+    <!-- TextView currency -->
+    <item name="textViewCurrencyValue" type="id" />
+    <item name="textViewCurrencyValueInitialized" type="id" />
+</resources>

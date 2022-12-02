@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.initialization.InitializationLoginViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/telenetColorSurface"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorSurface">
+
+            <ImageView
+                android:id="@+id/initializationLoginLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:src="@drawable/logo_welcome"
+                app:layout_constraintEnd_toEndOf="@+id/initialization_login_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/initialization_login_start_guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/credenciado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="center"
+                android:text="@string/initialization_login_credenciado"
+                android:textColor="@color/telenetColorPrimary"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/initializationLoginLogo"
+                app:layout_constraintEnd_toEndOf="@+id/initializationLoginLogo"
+                app:layout_constraintStart_toStartOf="@+id/initializationLoginLogo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/initialization_login_username"
+                style="@style/AppTheme.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/initialization_login_cnpj"
+                app:layout_constraintBottom_toTopOf="@+id/initialization_login_terminal"
+                app:layout_constraintEnd_toEndOf="@+id/initialization_login_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/initialization_login_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/credenciado"
+                app:layout_constraintVertical_bias="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789.-/ "
+                    android:inputType="number"
+                    android:text="@={viewModel.username}"
+                    app:mask='@{viewModel.credentialMasks}'  />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/initialization_login_terminal"
+                style="@style/AppTheme.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/initialization_login_terminal"
+                app:layout_constraintBottom_toTopOf="@+id/initialization_login_sign_in"
+                app:layout_constraintEnd_toEndOf="@+id/initialization_login_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/initialization_login_start_guideline"
+                app:layout_constraintVertical_bias="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="@integer/terminal_length"
+                    android:inputType="number"
+                    android:text="@={viewModel.password}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/initialization_login_sign_in"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_client"
+                android:fontFamily="@font/font_regular"
+                android:enabled="@{viewModel.valid, default = false}"
+                android:onClick="@{() -> viewModel.loginClicked()}"
+                android:text="@string/initialization_login_sign_in"
+                android:textAllCaps="false"
+                android:textColor="@color/button_client"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/initialization_login_need_help"
+                app:layout_constraintEnd_toEndOf="@+id/initialization_login_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/initialization_login_start_guideline" />
+
+            <TextView
+                android:id="@+id/initialization_login_need_help"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="71dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="center"
+                android:onClickListener="@{() -> viewModel.needHelpClicked()}"
+                android:padding="18dp"
+                android:text="@string/initialization_login_need_help"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/initialization_login_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/initialization_login_start_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/initialization_login_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/initialization_login_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

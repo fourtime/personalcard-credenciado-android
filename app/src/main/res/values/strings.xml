@@ -1,0 +1,135 @@
+<resources>
+    <string name="app_name">Personal Card - Credenciado</string>
+
+    <string name="mask_dynamic_cnpj">[00].[000].[000]/[0000]-[00]</string>
+    <string name="mask_dynamic_cpf">[000].[000].[000]-[000]</string>
+
+    <!-- Dialog -->
+    <string name="dialog_loading">Carregando…</string>
+
+    <string name="dialog_custom_error_button_text">Fechar</string>
+    <string name="dialog_generic_error_message">Ocorreu um erro inesperado. Caso persista, entre em contato com a operadora.</string>
+    <string name="dialog_generic_error_button_text">Fechar</string>
+    <string name="dialog_no_connection_error_message">Parece que você está sem conexão com a internet, tente novamente.</string>
+    <string name="dialog_no_connection_button_text">Tentar novamente</string>
+
+    <!-- Toolbar titles -->
+    <string name="toolbar_title_home">Personalcard</string>
+    <string name="toolbar_title_transactions">Transações</string>
+    <string name="toolbar_title_day_transactions">Extrato</string>
+
+    <!-- Welcome -->
+    <string name="welcome_title">Boas-vindas, credenciado</string>
+    <string name="welcome_continue">Continuar</string>
+    <string name="welcome_message" formatted="true">Para usar este aplicativo, você vai precisar informar um número de terminal. Para obter o entre em contato com nossa central de atendimento. de terminal e demais informações sobre o seu credenciamento, entre em contato com nossa central de atendimento. %s</string>
+
+    <!-- Home -->
+    <string name="home_title">Selecione a forma\nde pagamento</string>
+    <string name="home_post_paid_card">Cartão Pós-pago</string>
+    <string name="home_pre_paid_card">Cartão Pré-pago</string>
+    <string name="home_fleet_card">Cartão Pré-pago</string>
+    <string name="home_nav_header_terminal_number_format" formatted="true">Terminal: %s</string>
+    <string name="home_nav_transactions">Transações</string>
+    <string name="home_nav_support">Atendimento</string>
+    <string name="home_nav_change_password">Alterar senha</string>
+    <string name="home_nav_rate_app">Avaliar aplicativo</string>
+    <string name="home_nav_exit">Sair</string>
+
+    <!-- Initialization Login-->
+    <string name="initialization_login_credenciado">CREDENCIADO</string>
+    <string name="initialization_login_cnpj">CNPJ/CPF</string>
+    <string name="initialization_login_terminal">Terminal</string>
+    <string name="initialization_login_sign_in">Entrar</string>
+    <string name="initialization_login_need_help">Precisa de ajuda?</string>
+    <string name="initialization_login_forbidden_terminal">Terminal não autorizado na operadora.</string>
+    <string name="initialization_login_invalid_credentials">Não foi possível iniciar o terminal. Entre em contato com a operadora.</string>
+    <string name="initialization_login_need_help_title">Ajuda</string>
+    <string name="initialization_login_need_help_message">Para obter o número do terminal ou demais informações, entre em contato com a nossa central de atendimento.</string>
+    <string name="initialization_login_need_help_confirm">Entrar em contato</string>
+
+    <!-- Initialization Create Password-->
+    <string name="initialization_create_password_title">Crie uma senha\nde acesso</string>
+    <string name="initialization_create_password_password">Senha</string>
+    <string name="initialization_create_password_password_conmfirmation">Confirmação</string>
+    <string name="initialization_create_password_continue">Continuar</string>
+
+    <!-- Unlock Session -->
+    <string name="unlock_session_password">Senha</string>
+    <string name="unlock_session_unlock">Entrar</string>
+    <string name="unlock_session_forgot_password">Esqueceu sua senha?</string>
+    <string name="unlock_session_forgot_password_title">Esqueci minha senha</string>
+    <string name="unlock_session_forgot_password_message">Caso você tenha esquecido sua senha e precisa de ajuda, entre em contato com a nossa central de atendimento.</string>
+    <string name="unlock_session_forgot_password_confirm">Entrar em contato</string>
+
+    <!-- Billing Value -->
+    <string name="billing_value_title">Valor da compra</string>
+    <string name="biling_value_currency_symbol">R$</string>
+    <string name="billing_value_continue">Continuar</string>
+
+    <!-- Billing Installments -->
+    <string name="billing_installments_billing_value">Valor total:</string>
+    <string name="billing_installments_installments_label">Número de parcelas</string>
+    <string name="billing_installments_installments_format" formatted="true">Em até %sx</string>
+    <string name="billing_installments_continue">Continuar</string>
+
+    <!-- Billing QrCode -->
+    <string name="billing_qr_code_title">Valor da operação:</string>
+    <string name="billing_qr_code_value_label">R$</string>
+    <string name="billing_qr_code_show_qr_code">Mostre o código acima</string>
+    <string name="billing_qr_code_installments_format" formatted="true">em %sx</string>
+    <string name="billing_qr_code_finish">Continuar</string>
+    <string name="billing_qr_code_retry">Toque para recarregar</string>
+
+    <!-- Transactions -->
+    <string name="transactions_summary_title">Últimos 30 dias</string>
+    <string name="transactions_summary_total_value">Total de vendas</string>
+    <string name="transactions_summary_average_ticket_value">Ticket médio</string>
+    <string name="transactions_no_content">Nenhuma transação até o momento.</string>
+
+    <!-- Day Transactions -->
+    <string name="day_transactions_transactions_summary_total_value">Total de vendas</string>
+    <string name="day_transactions_card_type_post_paid" formatted="true">Cartão pós pago final: %s</string>
+    <string name="day_transactions_card_type_prepaid" formatted="true">Cartão pré pago final: %s</string>
+    <string name="day_transactions_card_type_frota" formatted="true">Cartão frota final: %s</string>
+    <string name="day_transactions_card_type_unknown" formatted="true">Cartão final: %s</string>
+    <string name="day_transactions_card_last_digits" formatted="true">Cartão final: %s</string>
+    <string name="day_transactions_no_content">Nenhuma transação até o momento.</string>
+    <string name="day_transactions_cancel_confirmation_title">Confirme o cancelamento</string>
+    <string name="day_transactions_cancel_confirmation_close">Fechar</string>
+    <string name="day_transactions_cancel_confirmation_confirm">Cancelar</string>
+    <string name="day_transactions_cancel_confirmation_message" formatted="true">Valor: %s\n\nCartão final: %s \n\nNSU Host: %s \n\nNSU Autorização: %s</string>
+    <string name="day_transactions_cancel_confirmation_password_title">Digite a senha de acesso</string>
+    <string name="day_transactions_cancel_confirmation_password_confirm">Confirmar</string>
+
+    <!-- Transaction Not Cancellable -->
+    <string name="day_transactions_not_cancellable_title">Transação sem cartão</string>
+    <string name="day_transactions_not_cancellable_close">Fechar</string>
+    <string name="day_transactions_not_cancellable_message">Essa transação não está vinculada a um cartão e por isso não pode ser cancelada.</string>
+
+    <!-- Transaction Cancellable -->
+    <string name="day_transactions_cancellable_message">Transação cancelada com sucesso</string>
+    <string name="day_transactions_cancellable_close">Fechar</string>
+
+    <!-- Change Password -->
+    <string name="change_password_title">Altere sua senha de acesso</string>
+    <string name="change_password_current_password">Senha atual</string>
+    <string name="change_password_new_password">Nova senha</string>
+    <string name="change_password_new_password_conmfirmation">Confirmação de nova senha</string>
+    <string name="change_password_continue">Continuar</string>
+    <string name="change_password_invalid_password">As senhas não coincidem. Por favor, tente novamente.</string>
+    <string name="change_password_invalid_current_password">Senha atual incorreta. Por favor, tente novamente.</string>
+    <string name="change_password_dialog_message_confirm_success">Senha alterada com sucesso</string>
+    <string name="change_password_dialog_button_confirm_success">Concluir</string>
+
+    <!-- Notification Chanel -->
+    <string name="notification_channel_id_default">default</string>
+    <string name="notification_channel_name_default">Geral</string>
+    <string name="notification_channel_description_default">Notificações gerais</string>
+
+    <!-- Timeout error message -->
+    <string name="timeout_error_message">Ops! A operação pode não ter sido realizada. Por favor verifique seu extrato para confirmar.</string>
+
+    <!-- Inválid Password Cancel Transaction-->
+    <string name="cancel_transaction_invalid_password">Senha Inválida</string>
+
+</resources>

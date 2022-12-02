@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.welcome.WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_initializationLoginFragment"
+            app:destination="@id/initializationLoginFragment"
+            app:popUpTo="@+id/welcomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.home.HomeFragment"
+        android:label="@string/toolbar_title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_billingValueFragment"
+            app:destination="@id/billingValueFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/initializationLoginFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.initialization.InitializationLoginFragment"
+        tools:layout="@layout/fragment_initialization_login">
+        <action
+            android:id="@+id/action_initializationLoginFragment_to_initializationCreatePasswordFragment"
+            app:destination="@id/initializationCreatePasswordFragment"
+            app:popUpTo="@+id/initializationLoginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/initializationCreatePasswordFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.initialization.InitializationCreatePasswordFragment"
+        tools:layout="@layout/fragment_initialization_create_password">
+        <action
+            android:id="@+id/action_initializationCreatePasswordFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/initializationCreatePasswordFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/unlockSessionFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.unlock.UnlockSessionFragment"
+        tools:layout="@layout/fragment_unlock_session">
+        <action
+            android:id="@+id/action_unlockSessionFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/unlockSessionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/billingValueFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.billing.BillingValueFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_billing_value">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="maxInstallments"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_billingValueFragment_to_billingInstallmentsFragment"
+            app:destination="@id/billingInstallmentsFragment" />
+        <action
+            android:id="@+id/action_billingValueFragment_to_billingQrCodeFragment"
+            app:destination="@id/billingQrCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/billingQrCodeFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.billing.BillingQrCodeFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_billing_qr_code">
+        <argument
+            android:name="billingValue"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="installments"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/billingInstallmentsFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.billing.BillingInstallmentsFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_billing_installments">
+        <action
+            android:id="@+id/action_billingInstallmentsFragment_to_billingQrCodeFragment"
+            app:destination="@id/billingQrCodeFragment" />
+        <argument
+            android:name="billingValue"
+            app:argType="string" />
+        <argument
+            android:name="maxInstallments"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.transactions.TransactionsFragment"
+        android:label="@string/toolbar_title_transactions"
+        tools:layout="@layout/fragment_transactions">
+        <action
+            android:id="@+id/action_transactionsFragment_to_dayTransactionsFragment"
+            app:destination="@id/dayTransactionsFragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="fourtime.com"
+            android:autoVerify="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayTransactionsFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.transactions.DayTransactionsFragment"
+        android:label="@string/toolbar_title_day_transactions"
+        tools:layout="@layout/fragment_day_transactions">
+        <argument
+            android:name="dailySummary"
+            app:argType="br.com.tln.personalcard.credenciador.model.TransactionDailySummary" />
+        <argument
+            android:name="label"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_dayTransactionsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="br.com.tln.personalcard.credenciador.ui.changepassword.ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" />
+    <action
+        android:id="@+id/action_global_welcomeFragment"
+        app:destination="@id/welcomeFragment" />
+    <action
+        android:id="@+id/action_global_initializationLoginFragment"
+        app:destination="@id/initializationLoginFragment" />
+    <action
+        android:id="@+id/action_global_initializationCreatePasswordFragment"
+        app:destination="@id/initializationCreatePasswordFragment" />
+    <action
+        android:id="@+id/action_global_unlockSessionFragment"
+        app:destination="@id/unlockSessionFragment" />
+</navigation>

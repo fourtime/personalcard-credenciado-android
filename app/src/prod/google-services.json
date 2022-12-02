@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "511756844328",
+    "firebase_url": "https://telenet-credenciado.firebaseio.com",
+    "project_id": "telenet-credenciado",
+    "storage_bucket": "telenet-credenciado.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511756844328:android:e6c88e1711ba22da",
+        "android_client_info": {
+          "package_name": "br.com.tln.credenciador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511756844328-pv2v0j0ab73f0t725b2p4qf7sqi8j44a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9geiEson3YDTn-Xvsz8xOst9lHkA-w8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511756844328-pv2v0j0ab73f0t725b2p4qf7sqi8j44a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "511756844328-717ur11ks8ribiieonk4juk0grn823sk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.personalcard.Credenciado"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511756844328:android:385952e84f16c1ebb3641d",
+        "android_client_info": {
+          "package_name": "br.com.tln.personalcard.credenciador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511756844328-pv2v0j0ab73f0t725b2p4qf7sqi8j44a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9geiEson3YDTn-Xvsz8xOst9lHkA-w8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511756844328-pv2v0j0ab73f0t725b2p4qf7sqi8j44a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "511756844328-717ur11ks8ribiieonk4juk0grn823sk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.personalcard.Credenciado"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

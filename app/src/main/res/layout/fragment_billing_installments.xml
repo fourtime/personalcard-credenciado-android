@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="textTransformer"
+            type="br.com.tln.personalcard.credenciador.transformer.TextTransformer" />
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.billing.BillingInstallmentsViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/telenetColorSurface"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/telenetColorSurface">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/billingInstallmentsValueLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorExtra1"
+            android:gravity="start"
+            android:lineSpacingExtra="10sp"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:text="@string/billing_installments_billing_value"
+            android:textColor="@color/telenetColorOnExtra1"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/billingInstallmentsValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
+        <TextView
+            android:id="@+id/billingInstallmentsValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorExtra1"
+            android:gravity="start"
+            android:lineSpacingExtra="10sp"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:text="@{textTransformer.currencyFormat(viewModel.billingValue)}"
+            android:textColor="@color/telenetColorOnExtra1"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar"
+            tools:text="R$ 180,00" />
+
+        <TextView
+            android:id="@+id/billingInstallmentsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:text="@string/billing_installments_installments_label"
+            android:textColor="@color/telenetColorOnSurface"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/billing_installments_end_guideline"
+            app:layout_constraintStart_toStartOf="@+id/billing_installments_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/billingInstallmentsValueLabel" />
+
+        <TextView
+            android:id="@+id/billingInstallmentsSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:gravity="start"
+            android:text="@{@string/billing_installments_installments_format(viewModel.maxInstallments)}"
+            android:textColor="@color/telenetColorOnSurface"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/billing_installments_end_guideline"
+            app:layout_constraintStart_toStartOf="@+id/billing_installments_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/billingInstallmentsTitle"
+            tools:text="Em até 12x" />
+
+        <EditText
+            android:id="@+id/billingInstallmentsInstallmentsAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:fontFamily="@font/font_bold"
+            android:inputType="number"
+            android:text='@={viewModel.value}'
+            android:textSize="28sp"
+            android:maxLength="2"
+            app:layout_constraintEnd_toEndOf="@+id/billing_installments_end_guideline"
+            app:layout_constraintStart_toStartOf="@+id/billing_installments_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/billingInstallmentsSubtitle" />
+
+        <Button
+            android:id="@+id/billingInstallmentsContinue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_client"
+            android:enabled='@{viewModel.valid}'
+            android:fontFamily="@font/font_regular"
+            android:onClick="@{() -> viewModel.continueClicked()}"
+            android:text="@string/billing_installments_continue"
+            android:textAllCaps="false"
+            android:textColor="@color/button_client"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/billing_installments_end_guideline"
+            app:layout_constraintStart_toStartOf="@+id/billing_installments_start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/billingInstallmentsInstallmentsAmount"
+            app:layout_constraintVertical_bias="1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/billing_installments_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/billing_installments_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

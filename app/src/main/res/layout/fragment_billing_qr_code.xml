@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+        <variable
+            name="error"
+            type="Boolean" />
+
+        <variable
+            name="retryClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="textTransformer"
+            type="br.com.tln.personalcard.credenciador.transformer.TextTransformer" />
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.billing.BillingQrCodeViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorSurface">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <TextView
+                android:id="@+id/billingQrCodeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
+                android:gravity="start"
+                android:text="@string/billing_qr_code_title"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_qr_code_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
+            <TextView
+                android:id="@+id/billingQrCodeValueLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="start"
+                android:text="@string/billing_qr_code_value_label"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/billingQrCodeValue"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/billing_qr_code_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingQrCodeTitle" />
+
+            <TextView
+                android:id="@+id/billingQrCodeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/font_bold"
+                android:gravity="start"
+                android:text="@{textTransformer.currencyFormatWithoutSymbol(viewModel.billingValue)}"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/billingQrCodeValueLabel"
+                app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_end_guideline"
+                app:layout_constraintStart_toEndOf="@+id/billingQrCodeValueLabel"
+                tools:text="180,00" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/billingQrCodeInstallments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_regular"
+                android:gravity="start"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_qr_code_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingQrCodeValue"
+                android:text="@{@string/billing_qr_code_installments_format(viewModel.installments)}"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/billingQrCodeQrCodeFrame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/billing_qr_code_card"
+                android:elevation="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_qr_code_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingQrCodeInstallments">
+
+                <ImageView
+                    android:id="@+id/billingQrCodeQrCode"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    app:invisible="@{loading || error}"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_qr_code_container_end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/billing_qr_code_qr_code_container_start_guideline"
+                    app:layout_constraintTop_toTopOf="@+id/billing_qr_code_qr_code_container_top_guideline" />
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/billingQrCodeQrCode"
+                    app:layout_constraintEnd_toEndOf="@+id/billingQrCodeQrCode"
+                    app:layout_constraintStart_toStartOf="@+id/billingQrCodeQrCode"
+                    app:layout_constraintTop_toTopOf="@+id/billingQrCodeQrCode"
+                    app:visible="@{loading}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:indeterminate="true"
+                    android:onClickListener="@{retryClickListener}"
+                    app:layout_constraintBottom_toBottomOf="@+id/billingQrCodeQrCode"
+                    app:layout_constraintEnd_toEndOf="@+id/billingQrCodeQrCode"
+                    app:layout_constraintStart_toStartOf="@+id/billingQrCodeQrCode"
+                    app:layout_constraintTop_toTopOf="@+id/billingQrCodeQrCode"
+                    app:visible="@{error}">
+
+                    <ImageView
+                        android:id="@+id/retry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="100dp"
+                        android:src="@drawable/reload"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="@string/billing_qr_code_retry"
+                        android:textColor="@color/telenetColorExtra2"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/retry"
+                        app:layout_goneMarginTop="25dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@string/billing_qr_code_show_qr_code"
+                    android:textColor="@color/telenetColorOnSurface"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/billing_qr_code_qr_code_container_bottom_guideline"
+                    app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_qr_code_container_end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/billing_qr_code_qr_code_container_start_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/billingQrCodeQrCode" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/billing_qr_code_qr_code_container_start_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="30dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/billing_qr_code_qr_code_container_end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="30dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/billing_qr_code_qr_code_container_top_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="30dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/billing_qr_code_qr_code_container_bottom_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_end="30dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <Button
+                android:id="@+id/billingQrCodeContinue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_client"
+                android:fontFamily="@font/font_regular"
+                android:onClick="@{() -> viewModel.finishClicked()}"
+                android:text="@string/billing_qr_code_finish"
+                android:textAllCaps="false"
+                android:textColor="@color/button_client"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_qr_code_start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/billingQrCodeQrCodeFrame"
+                app:layout_constraintVertical_bias="1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/billing_qr_code_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/billing_qr_code_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

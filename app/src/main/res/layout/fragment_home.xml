@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.home.HomeViewModel" />
+
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/telenetColorSurface"
+        app:visible="@{viewModel.hasActiveSession}"
+        tools:openDrawer="start">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/telenetColorSurface"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <TextView
+                android:id="@+id/homeTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/font_regular"
+                android:text="@string/home_title"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/home_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/home_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
+            <Button
+                android:id="@+id/homePostPaidCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/home_button"
+                android:drawableStart="@drawable/home_button_icon_card"
+                android:drawableEnd="@drawable/chevron"
+                android:drawablePadding="16dp"
+                android:elevation="8dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="start|center_vertical"
+                android:onClick="@{() -> viewModel.postPaidCardClicked()}"
+                android:paddingStart="24dp"
+                android:paddingTop="32dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="32dp"
+                android:text="@string/home_post_paid_card"
+                android:textAllCaps="false"
+                android:textColor="@color/telenetColorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/home_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/home_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/homeTitle"
+                app:visible="@{viewModel.acceptPostPaidCard}" />
+
+            <Button
+                android:id="@+id/homePrePaidCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/home_button"
+                android:drawableStart="@drawable/home_button_icon_card"
+                android:drawableEnd="@drawable/chevron"
+                android:drawablePadding="16dp"
+                android:elevation="8dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="start|center_vertical"
+                android:onClick="@{() -> viewModel.prePaidCardClicked()}"
+                android:paddingStart="24dp"
+                android:paddingTop="32dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="32dp"
+                android:text="@string/home_pre_paid_card"
+                android:textAllCaps="false"
+                android:textColor="@color/telenetColorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/home_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/home_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/homePostPaidCard"
+                app:visible="@{viewModel.acceptPrepaidCard}" />
+
+            <Button
+                android:id="@+id/homeFleetCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/home_button"
+                android:drawableStart="@drawable/home_button_icon_fleet"
+                android:drawableEnd="@drawable/chevron"
+                android:drawablePadding="16dp"
+                android:elevation="8dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="start|center_vertical"
+                android:onClick="@{() -> viewModel.fleetCardClicked()}"
+                android:paddingStart="24dp"
+                android:paddingTop="32dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="32dp"
+                android:text="@string/home_fleet_card"
+                android:textAllCaps="false"
+                android:textColor="@color/telenetColorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/home_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/home_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/homePrePaidCard"
+                app:layout_constraintVertical_bias="0"
+                app:visible="@{viewModel.acceptFleetCard}" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/home_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/home_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/telenetColorBackground"
+            android:fitsSystemWindows="true"
+            android:theme="@style/NavigationDrawerStyle"
+            app:headerLayout="@layout/home_nav_view_header"
+            app:menu="@menu/menu_home"
+            tools:itemIconTint="null" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

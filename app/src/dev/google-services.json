@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "507148760177",
+    "firebase_url": "https://telenet-credenciado-dev.firebaseio.com",
+    "project_id": "telenet-credenciado-dev",
+    "storage_bucket": "telenet-credenciado-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507148760177:android:a98a57becbffe28b17d7d0",
+        "android_client_info": {
+          "package_name": "br.com.tln.personalcard.credenciador.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjFKX5XR0KHKBNYU7rvEPkwfh7MSkROmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

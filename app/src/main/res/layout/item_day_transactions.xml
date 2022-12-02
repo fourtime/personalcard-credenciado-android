@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemDayTransactionsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/transactions_end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/transactions_start_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+        <TextView
+            android:id="@+id/itemDayTransactionsNsuAuthorization"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_regular"
+            android:textColor="@color/telenetColorExtra4"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/itemDayTransactionsValue"
+            app:layout_constraintStart_toStartOf="@+id/item_transactions_start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/item_transactions_top_guideline"
+            tools:text="812734" />
+
+        <TextView
+            android:id="@+id/itemDayTransactionsValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_regular"
+            android:gravity="end"
+            android:textColor="@color/telenetColorExtra4"
+            android:textSize="13sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/itemDayTransactionsNsuAuthorization"
+            app:layout_constraintEnd_toStartOf="@id/itemDayTransactionCancel"
+            app:layout_constraintStart_toEndOf="@+id/itemDayTransactionsNsuAuthorization"
+            tools:text="R$ 13,45" />
+
+        <TextView
+            android:id="@+id/itemDayTransactionsCardLastDigits"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/font_regular"
+            android:textColor="@color/telenetColorExtra3"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_transactions_bottom_guideline"
+            app:layout_constraintStart_toStartOf="@+id/itemDayTransactionsNsuAuthorization"
+            app:layout_constraintTop_toBottomOf="@+id/itemDayTransactionsNsuAuthorization"
+            app:layout_constraintEnd_toStartOf="@id/itemDayTransactionsHour"
+            tools:text="Terça" />
+
+        <TextView
+            android:id="@+id/itemDayTransactionsHour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_regular"
+            android:gravity="end"
+            android:textColor="@color/telenetColorExtra3"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_transactions_bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@+id/itemDayTransactionsValue"
+            app:layout_constraintStart_toEndOf="@+id/itemDayTransactionsCardLastDigits"
+            app:layout_constraintTop_toBottomOf="@+id/itemDayTransactionsNsuAuthorization"
+            tools:text="18:03" />
+
+        <ImageView
+            android:id="@+id/itemDayTransactionCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/remove_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            android:id="@+id/itemDayTransactionCancelProgress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="@+id/itemDayTransactionCancel"
+            app:layout_constraintEnd_toEndOf="@+id/itemDayTransactionCancel"
+            app:layout_constraintStart_toStartOf="@+id/itemDayTransactionCancel"
+            app:layout_constraintTop_toTopOf="@+id/itemDayTransactionCancel" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/telenetColorDividerOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_transactions_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

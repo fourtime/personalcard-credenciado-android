@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+        <variable
+            name="empty"
+            type="Boolean" />
+
+        <variable
+            name="textTransformer"
+            type="br.com.tln.personalcard.credenciador.transformer.TextTransformer" />
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.transactions.TransactionsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/telenetColorSurface">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:elevation="0dp"
+                app:elevation="0dp">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|snap">
+
+                    <View
+                        android:id="@+id/appBarExtension"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/telenetColorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@+id/transactionsSummaryContainer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/transactionsSummaryContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/transactions_container"
+                        android:elevation="8dp"
+                        app:layout_constraintEnd_toEndOf="@+id/transactions_end_guideline"
+                        app:layout_constraintStart_toStartOf="@+id/transactions_start_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+                        <TextView
+                            android:id="@+id/transactionsSummaryTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_bold"
+                            android:text="@{viewModel.periodSummaryLabel}"
+                            android:textColor="@color/telenetColorOnBackground"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="@+id/transactions_summary_end_guideline"
+                            app:layout_constraintStart_toStartOf="@+id/transactions_summary_start_guideline"
+                            app:layout_constraintTop_toTopOf="@+id/transactions_summary_top_guideline"
+                            tools:text="@string/transactions_summary_title" />
+
+                        <TextView
+                            android:id="@+id/transactionsSummaryTotalValue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/font_bold"
+                            android:text="@{textTransformer.currencyFormat(viewModel.periodSummaryTotalValue), default = 0}"
+                            android:textColor="@color/telenetColorExtra2"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toStartOf="@+id/transactionsSummaryAverageTicketValue"
+                            app:layout_constraintStart_toStartOf="@+id/transactions_summary_start_guideline"
+                            app:layout_constraintTop_toBottomOf="@+id/transactionsSummaryTitle"
+                            tools:text="R$ 3.790" />
+
+                        <TextView
+                            android:id="@+id/transactionsSummaryAverageTicketValue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_bold"
+                            android:gravity="end"
+                            android:text="@{textTransformer.currencyFormat(viewModel.periodSummaryAverageTicketValue)}"
+                            android:textColor="@color/telenetColorOnBackground"
+                            android:textSize="12sp"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/transactionsSummaryTotalValue"
+                            app:layout_constraintEnd_toEndOf="@+id/transactions_summary_end_guideline"
+                            app:layout_constraintStart_toEndOf="@+id/transactionsSummaryTotalValue"
+                            tools:text="R$ 3.790" />
+
+                        <TextView
+                            android:id="@+id/transactionsSummaryTotalValueLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_regular"
+                            android:text="@string/transactions_summary_total_value"
+                            android:textColor="@color/telenetColorExtra3"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/transactions_summary_bottom_guideline"
+                            app:layout_constraintEnd_toEndOf="@+id/transactionsSummaryTotalValue"
+                            app:layout_constraintStart_toStartOf="@+id/transactionsSummaryTotalValue"
+                            app:layout_constraintTop_toBottomOf="@+id/transactionsSummaryTotalValue" />
+
+                        <TextView
+                            android:id="@+id/transactionsSummaryAverageTicketValueLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_regular"
+                            android:gravity="end"
+                            android:text="@string/transactions_summary_average_ticket_value"
+                            android:textColor="@color/telenetColorExtra3"
+                            android:textSize="12sp"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/transactionsSummaryTotalValueLabel"
+                            app:layout_constraintEnd_toEndOf="@+id/transactionsSummaryAverageTicketValue"
+                            app:layout_constraintStart_toStartOf="@+id/transactionsSummaryAverageTicketValue" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/transactions_summary_top_guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_begin="16dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/transactions_summary_start_guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="16dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/transactions_summary_end_guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="16dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/transactions_summary_bottom_guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_end="16dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="16dp"
+                android:elevation="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dayTransactionsSummaryContainer"
+                app:layout_constraintVertical_bias="0"
+                app:visible="@{!loading &amp;&amp; !empty}"
+                tools:elevation="0dp"
+                tools:listitem="@layout/item_transactions" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font_regular"
+                android:text="@string/transactions_no_content"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="14sp"
+                app:visible="@{!loading &amp;&amp; empty}" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                app:visible="@{loading}" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

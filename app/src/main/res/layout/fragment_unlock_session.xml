@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.unlock.UnlockSessionViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/telenetColorSurface"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorSurface">
+
+            <ImageView
+                android:id="@+id/unlockSessionLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/logo_welcome"
+                app:layout_constraintEnd_toEndOf="@+id/unlock_session_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/unlock_session_start_guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/unlockSessionPassword"
+                style="@style/AppTheme.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:hint="@string/unlock_session_password"
+                app:error="@{viewModel.error}"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="@+id/unlock_session_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/unlock_session_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/unlockSessionLogo"
+                app:layout_constraintVertical_bias="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword"
+                    android:maxLength="8"
+                    android:text="@={viewModel.password}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/unlockSessionUnlock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_client"
+                android:fontFamily="@font/font_regular"
+                android:onClick="@{() -> viewModel.unlockSessionClicked()}"
+                android:text="@string/unlock_session_unlock"
+                android:textAllCaps="false"
+                android:textColor="@color/button_client"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/unlock_session_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/unlock_session_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/unlockSessionPassword" />
+
+            <TextView
+                android:id="@+id/unlockSessionForgotPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/font_regular"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.forgotPasswordClicked()}"
+                android:padding="18dp"
+                android:text="@string/unlock_session_forgot_password"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/unlock_session_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/unlock_session_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/unlockSessionUnlock"
+                app:layout_constraintVertical_bias="0" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/unlock_session_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/unlock_session_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
