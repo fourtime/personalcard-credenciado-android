@@ -21,12 +21,12 @@
     <!-- Welcome -->
     <string name="welcome_title">Boas-vindas, credenciado</string>
     <string name="welcome_continue">Continuar</string>
-    <string name="welcome_message" formatted="true">Para usar este aplicativo, você vai precisar informar um número de terminal. Para obter o entre em contato com nossa central de atendimento. de terminal e demais informações sobre o seu credenciamento, entre em contato com nossa central de atendimento. %s</string>
+    <string name="welcome_message" formatted="true">Para usar este aplicativo, você vai precisar informar um número de terminal. Para obter o número de terminal e demais informações sobre seu credenciamento, entre em contato conosco pelo telefone %s.</string>
 
     <!-- Home -->
     <string name="home_title">Selecione a forma\nde pagamento</string>
-    <string name="home_post_paid_card">Cartão Pós-pago</string>
-    <string name="home_pre_paid_card">Cartão Pré-pago</string>
+    <string name="home_post_paid_card">Cartão Pós-pago/Crédito</string>
+    <string name="home_pre_paid_card">Cartão Pré-pago/Débito</string>
     <string name="home_fleet_card">Cartão Pré-pago</string>
     <string name="home_nav_header_terminal_number_format" formatted="true">Terminal: %s</string>
     <string name="home_nav_transactions">Transações</string>
