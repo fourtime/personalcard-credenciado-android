@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+        <variable
+            name="error"
+            type="Boolean" />
+
+        <variable
+            name="textTransformer"
+            type="br.com.tln.personalcard.credenciador.transformer.TextTransformer" />
+
+        <variable
+            name="viewModel"
+            type="br.com.tln.personalcard.credenciador.ui.billing.BillingCardPaymentViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/telenetColorSurface">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <TextView
+                android:id="@+id/billingValueTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
+                android:gravity="start"
+                android:text="@string/billing_qr_code_title"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_card_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_card_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
+            <TextView
+                android:id="@+id/billingCardValueLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="start"
+                android:text="@string/billing_qr_code_value_label"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/billingCardValue"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/billing_card_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingValueTitle" />
+
+            <TextView
+                android:id="@+id/billingCardValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/font_bold"
+                android:gravity="start"
+                android:text="@{textTransformer.currencyFormatWithoutSymbol(viewModel.billingValue)}"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/billingCardValueLabel"
+                app:layout_constraintEnd_toEndOf="@+id/billing_card_end_guideline"
+                app:layout_constraintStart_toEndOf="@+id/billingCardValueLabel"
+                tools:text="180,00" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:id="@+id/billingCardInstallments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_regular"
+                android:gravity="start"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_card_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_card_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingCardValue"
+                android:text="@{@string/billing_qr_code_installments_format(viewModel.installments)}"/>
+
+            <TextView
+                android:id="@+id/billingCardTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="start"
+                android:text="@{viewModel.shouldShowCardField ? @string/billing_card_title : @string/billing_card_title_withcard}"
+                android:textColor="@color/telenetColorOnSurface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_card_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_card_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingCardInstallments" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/billingCardNumberLayout"
+                style="@style/AppTheme.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:hint="@string/billing_card_cardnumber_hint"
+                app:visible="@{viewModel.shouldShowCardField}"
+                app:layout_constraintEnd_toEndOf="@+id/billingCardTitle"
+                app:layout_constraintStart_toStartOf="@+id/billingCardTitle"
+                app:layout_constraintTop_toBottomOf="@+id/billingCardTitle"
+                app:layout_constraintVertical_bias="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:digits="0123456789 "
+                    android:textSize="16sp"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:text="@={viewModel.cardNumber}"
+                    app:mask="@{viewModel.cardNumberMasks}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/billingCardPasswordLayout"
+                style="@style/AppTheme.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/billing_card_password_hint"
+                app:layout_constraintEnd_toEndOf="@+id/billingCardTitle"
+                app:layout_constraintStart_toStartOf="@+id/billingCardTitle"
+                app:layout_constraintTop_toBottomOf="@+id/billingCardNumberLayout"
+                app:layout_constraintVertical_bias="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cardPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:digits="0123456789"
+                    android:textSize="16sp"
+                    android:imeOptions="actionDone"
+                    android:textAlignment="center"
+                    android:maxLength="@integer/cardpassword_max_length"
+                    android:inputType="numberPassword"
+                    android:text="@={viewModel.cardPassword}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/billingCardWarning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/crypto_icon"
+                android:drawablePadding="10dp"
+                android:gravity="start"
+                android:text="@string/billing_card_warning"
+                android:textColor="@color/telenetColorExtra5"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_card_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_card_start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/billingCardPasswordLayout" />
+
+            <Button
+                android:id="@+id/billingCardContinue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/button_client"
+                android:fontFamily="@font/font_regular"
+                android:enabled="@{viewModel.valid, default = false}"
+                android:onClick="@{() -> viewModel.finishClicked()}"
+                android:text="@string/billing_card_finish"
+                android:textAllCaps="false"
+                android:textColor="@color/button_client"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/billing_card_end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/billing_card_start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/billingCardWarning"
+                app:layout_constraintVertical_bias="1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/billing_card_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/billing_card_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

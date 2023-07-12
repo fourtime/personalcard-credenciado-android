@@ -5,6 +5,9 @@
     <!-- Initialization -->
     <integer name="cnpj_lenght">14</integer>
     <integer name="cpf_length">11</integer>
+    <integer name="cardnumber_min_length">15</integer>
+    <integer name="cardnumber_max_length">18</integer>
+    <integer name="cardpassword_min_length">4</integer>
+    <integer name="cardpassword_max_length">6</integer>
     <integer name="terminal_length">8</integer>
-
 </resources>

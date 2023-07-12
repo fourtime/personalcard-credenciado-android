@@ -3,6 +3,7 @@ package br.com.tln.personalcard.credenciador.ui.home
 import androidx.navigation.navOptions
 import br.com.tln.personalcard.credenciador.R
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseNavigator
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -84,7 +85,7 @@ class HomeNavigator @Inject constructor() : SessionRequiredBaseNavigator() {
         }
 
         val directions = HomeFragmentDirections.actionHomeFragmentToBillingValueFragment(
-            title = "Cartão Pré-pago",
+            cardType = PaymentMethod.PRE_PAID_CARD.id ?: 0,
             maxInstallments = maxInstallments
         )
         navController.navigate(directions)
@@ -96,7 +97,7 @@ class HomeNavigator @Inject constructor() : SessionRequiredBaseNavigator() {
         }
 
         val directions = HomeFragmentDirections.actionHomeFragmentToBillingValueFragment(
-            title = "Cartão Pós-pago",
+            cardType = PaymentMethod.POST_PAID_CARD.id ?: 1,
             maxInstallments = maxInstallments
         )
         navController.navigate(directions)

@@ -107,5 +107,4 @@ object CryptographyUtils {
 
         return String(decryptedText)
     }
-
 }

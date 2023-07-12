@@ -18,4 +18,8 @@
     <!-- TextView currency -->
     <item name="textViewCurrencyValue" type="id" />
     <item name="textViewCurrencyValueInitialized" type="id" />
+
+    <!-- TextView temporal -->
+    <item name="textViewTemporalValue" type="id" />
+    <item name="textViewTemporalValueInitialized" type="id" />
 </resources>

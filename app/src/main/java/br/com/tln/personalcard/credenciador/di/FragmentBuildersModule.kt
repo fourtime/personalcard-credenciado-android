@@ -1,8 +1,6 @@
 package br.com.tln.personalcard.credenciador.di
 
-import br.com.tln.personalcard.credenciador.ui.billing.BillingInstallmentsFragment
-import br.com.tln.personalcard.credenciador.ui.billing.BillingQrCodeFragment
-import br.com.tln.personalcard.credenciador.ui.billing.BillingValueFragment
+import br.com.tln.personalcard.credenciador.ui.billing.*
 import br.com.tln.personalcard.credenciador.ui.changepassword.ChangePasswordFragment
 import br.com.tln.personalcard.credenciador.ui.home.HomeFragment
 import br.com.tln.personalcard.credenciador.ui.initialization.InitializationCreatePasswordFragment
@@ -44,6 +42,15 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeBillingQrCodeFragment(): BillingQrCodeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeBillingQrCodeReaderFragment(): BillingQrCodeReaderFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeBillingCardFragment(): BillingCardPaymentFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeBillingPaymentSuccessFragment(): BillingPaymentSuccessFragment
 
     @ContributesAndroidInjector
     abstract fun contributeTransactionsFragment(): TransactionsFragment

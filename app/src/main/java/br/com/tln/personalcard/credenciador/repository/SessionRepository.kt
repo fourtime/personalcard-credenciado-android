@@ -236,6 +236,10 @@ class SessionRepository @Inject constructor(
         return liveData
     }
 
+    fun getAppPreference(): AppPreferences {
+        return appPreferences
+    }
+
     fun getSessionLiveData(allowCache: Boolean = true): LiveData<Session?> {
         return if (allowCache) {
             sessionLiveData

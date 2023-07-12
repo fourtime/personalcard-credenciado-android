@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseViewModel
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
 import br.com.tln.personalcard.credenciador.repository.SessionRepository
 import java.math.BigDecimal
 import javax.inject.Inject
@@ -16,10 +17,10 @@ class BillingInstallmentsViewModel @Inject constructor(
     navigator = navigator
 ) {
 
-    var mTitle: String? = null
     var mBillingValue: BigDecimal? = null
     var mMaxInstallments: Int? = null
 
+    val cardType = MutableLiveData<PaymentMethod>()
     val billingValue = MutableLiveData<BigDecimal>()
     val maxInstallments = MutableLiveData<String>()
     val value = MutableLiveData<String?>()
@@ -37,8 +38,8 @@ class BillingInstallmentsViewModel @Inject constructor(
         }
     }
 
-    fun setTitle(title: String) {
-        this.mTitle = title
+    fun setCardType(value: PaymentMethod) {
+        cardType.postValue(value)
     }
 
     fun setBillingValue(value: BigDecimal) {
@@ -58,11 +59,11 @@ class BillingInstallmentsViewModel @Inject constructor(
             return
         }
 
-        val title = mTitle ?: throw IllegalStateException("Title can not be null")
+        val cardTypeValue = cardType.value ?: throw IllegalStateException("Billing value can not be null")
         val billingValue = mBillingValue ?: throw IllegalStateException("Billing value can not be null")
 
         val installments = valueStr.toInt()
 
-        navigator.navigateToQrCode(title = title, billingValue = billingValue, installments = installments)
+        navigator.navigateToQrCode(cardType = cardTypeValue, billingValue = billingValue, installments = installments)
     }
 }

@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Personal Card - Credenciado</string>
+    <string name="app_name">PersonalCard Credenciado</string>
 
     <string name="mask_dynamic_cnpj">[00].[000].[000]/[0000]-[00]</string>
     <string name="mask_dynamic_cpf">[000].[000].[000]-[000]</string>
+    <string name="mask_dynamic_cardnumber">[0000] [0000] [0000] [0000] [00]</string>
 
     <!-- Dialog -->
     <string name="dialog_loading">Carregando…</string>
@@ -14,19 +15,21 @@
     <string name="dialog_no_connection_button_text">Tentar novamente</string>
 
     <!-- Toolbar titles -->
-    <string name="toolbar_title_home">Personalcard</string>
+    <string name="toolbar_title_home">PersonalCard</string>
     <string name="toolbar_title_transactions">Transações</string>
     <string name="toolbar_title_day_transactions">Extrato</string>
+    <string name="toolbar_title_billing_payment_success">Pagamento com cartão</string>
+    <string name="toolbar_title_billing_qrcode_reader">Ler QR Code do cartão</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Boas-vindas, credenciado</string>
     <string name="welcome_continue">Continuar</string>
-    <string name="welcome_message" formatted="true">Para usar este aplicativo, você vai precisar informar um número de terminal. Para obter o número de terminal e demais informações sobre seu credenciamento, entre em contato conosco pelo telefone %s.</string>
+    <string name="welcome_message" formatted="true">Para usar este aplicativo, você vai precisar informar um número de terminal. Para obter o entre em contato com nossa central de atendimento. de terminal e demais informações sobre o seu credenciamento, entre em contato com nossa central de atendimento. %s</string>
 
     <!-- Home -->
     <string name="home_title">Selecione a forma\nde pagamento</string>
-    <string name="home_post_paid_card">Cartão Pós-pago/Crédito</string>
-    <string name="home_pre_paid_card">Cartão Pré-pago/Débito</string>
+    <string name="home_post_paid_card">Cartão Pós-pago</string>
+    <string name="home_pre_paid_card">Cartão Pré-pago</string>
     <string name="home_fleet_card">Cartão Pré-pago</string>
     <string name="home_nav_header_terminal_number_format" formatted="true">Terminal: %s</string>
     <string name="home_nav_transactions">Transações</string>
@@ -72,13 +75,45 @@
     <string name="billing_installments_installments_format" formatted="true">Em até %sx</string>
     <string name="billing_installments_continue">Continuar</string>
 
+    <!-- Billing Payment Options -->
+    <string name="billing_payment_options_title">Como será pago?</string>
+    <string name="billing_payment_options_card">Cartão</string>
+    <string name="billing_payment_options_qrcode">QR Code</string>
+
+    <!-- Billing Card -->
+    <string name="billing_card_title">Digite os dados do cartão</string>
+    <string name="billing_card_title_withcard">Digite a senha do cartão</string>
+    <string name="billing_card_finish">Efetuar pagamento</string>
+    <string name="billing_card_warning">Esses dados são criptografados e estão seguros.</string>
+    <string name="billing_card_password_hint">Senha</string>
+    <string name="billing_card_cardnumber_hint">Número do cartão</string>
+    <string name="billing_card_dialog_message_confirm_success">Pagamento efetuado com sucesso.</string>
+    <string name="billing_card_dialog_button_confirm_success">Concluir</string>
+
+    <!-- Billing Payment Success -->
+    <string name="billing_payment_success_message">Pagamento realizado\ncom sucesso!</string>
+    <string name="billing_payment_success_transaction_value">Valor:</string>
+    <string name="billing_payment_success_transaction_date">Data:</string>
+    <string name="billing_payment_success_transaction_time">Hora:</string>
+    <string name="billing_payment_success_transaction_authorization">Autorização:</string>
+    <string name="billing_payment_success_transaction_number">Transação:</string>
+    <string name="billing_payment_success_conclude">Concluir</string>
+    <string name="billing_payment_success_pattern_transaction_date">dd/MM/yyyy</string>
+    <string name="billing_payment_success_pattern_transaction_time">HH:mm</string>
+
     <!-- Billing QrCode -->
     <string name="billing_qr_code_title">Valor da operação:</string>
     <string name="billing_qr_code_value_label">R$</string>
     <string name="billing_qr_code_show_qr_code">Mostre o código acima</string>
+    <string name="billing_qr_code_read_card_data">clique aqui para ler o cartão</string>
+    <string name="billing_qr_code_show_card_payment">clique aqui para digitar o cartão</string>
     <string name="billing_qr_code_installments_format" formatted="true">em %sx</string>
     <string name="billing_qr_code_finish">Continuar</string>
     <string name="billing_qr_code_retry">Toque para recarregar</string>
+
+    <!-- Pay with QR Code Reader -->
+    <string name="pay_with_qr_code_reader_message">Posicione o QR Code no quadrado\nabaixo para que seja escaneado.</string>
+    <string name="pay_with_qr_code_reader_invalid_token">O QR Code lido não é válido. Tente novamente com outro QR Code ou entre em contato com a operadora.</string>
 
     <!-- Transactions -->
     <string name="transactions_summary_title">Últimos 30 dias</string>

@@ -12,18 +12,11 @@ import br.com.tln.personalcard.credenciador.extensions.CryptographyUtils.decrypt
 import br.com.tln.personalcard.credenciador.extensions.format
 import br.com.tln.personalcard.credenciador.extensions.responseError
 import br.com.tln.personalcard.credenciador.extensions.toLocalDateTime
-import br.com.tln.personalcard.credenciador.model.Account
-import br.com.tln.personalcard.credenciador.model.AnalyticSummary
-import br.com.tln.personalcard.credenciador.model.Transaction
-import br.com.tln.personalcard.credenciador.model.TransactionDailySummary
-import br.com.tln.personalcard.credenciador.model.TransactionPeriodSummary
+import br.com.tln.personalcard.credenciador.model.*
 import br.com.tln.personalcard.credenciador.provider.ResourceProvider
 import br.com.tln.personalcard.credenciador.webservice.TransactionService
 import br.com.tln.personalcard.credenciador.webservice.TelenetService
-import br.com.tln.personalcard.credenciador.webservice.request.AnalyticSatatementListRequest
-import br.com.tln.personalcard.credenciador.webservice.request.CancelTransactionRequest
-import br.com.tln.personalcard.credenciador.webservice.request.QrCodeRequest
-import br.com.tln.personalcard.credenciador.webservice.request.StatementListRequest
+import br.com.tln.personalcard.credenciador.webservice.request.*
 import br.com.tln.personalcard.credenciador.webservice.response.ErrorBodyResponse
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CancellationException
@@ -45,58 +38,51 @@ class TerminalRepository @Inject constructor(
     private val transactionService: TransactionService,
     private val moshi: Moshi
 ) {
+    suspend fun payWithCard(accessToken: AccessToken, paymentToken: String, carddata: String): Either<Throwable, Resource<CardPayment>> {
+        val request = PayWithCardRequest(paymentToken, carddata)
+        return payWithCard(accessToken.formattedToken, request)
+    }
 
-    suspend fun getBillingQrCodeLiveData(
-        accessToken: AccessToken,
-        installments: Int,
-        billingValue: Double
-    ): LiveData<Either<Throwable, Resource<String>>> {
-        val liveData: MutableLiveData<Either<Throwable, Resource<String>>> = MutableLiveData()
+    suspend fun payWithCardQRCode(accessToken: AccessToken, paymentToken: String, cardType: Int, cardQRCode: String, cardPassword: String): Either<Throwable, Resource<CardPayment>> {
+        val request = PayWithCardQRCodeRequest(paymentToken, cardType, cardQRCode, cardPassword)
+        return payWithCardQRCode(accessToken.formattedToken, request)
+    }
+
+    suspend fun getBillingQrCodeLiveData(accessToken: AccessToken, installments: Int, billingValue: Double): LiveData<Either<Throwable, Resource<QrCodePayment>>> {
+        val liveData: MutableLiveData<Either<Throwable, Resource<QrCodePayment>>> = MutableLiveData()
         liveData.postValue(Either.right(Resource.loading()))
 
         CoroutineScope(context = coroutineContext).launch {
             val request = QrCodeRequest(LocalDateTime.now().format(), installments, billingValue)
-            val result: Either<Throwable, Resource<String>> = getBillingQrCode(accessToken.formattedToken, request)
+            val result: Either<Throwable, Resource<QrCodePayment>> = getBillingQrCode(accessToken.formattedToken, request)
             liveData.postValue(result)
         }
 
         return liveData
     }
 
-    suspend fun getTransactionsLiveData(
-        accessToken: AccessToken,
-        request: StatementListRequest
-    ): Either<Throwable, Resource<TransactionPeriodSummary>> {
-
-        return  getTransactions(accessToken.formattedToken, request)
+    suspend fun getTransactionsLiveData(accessToken: AccessToken, request: StatementListRequest): Either<Throwable, Resource<TransactionPeriodSummary>> {
+        return getTransactions(accessToken.formattedToken, request)
     }
 
-    suspend fun getDayTransactionsLiveData(
-        accessToken: AccessToken,
-        request: AnalyticSatatementListRequest
-    ): Either<Throwable, Resource<AnalyticSummary>> {
-
-        return  getDayTransactions(accessToken.formattedToken, request)
+    suspend fun getDayTransactionsLiveData(accessToken: AccessToken, request: AnalyticSatatementListRequest): Either<Throwable, Resource<AnalyticSummary>> {
+        return getDayTransactions(accessToken.formattedToken, request)
     }
 
-    suspend fun getCancelTransactionLiveData(
-        accessToken: AccessToken,
-        account: Account,
-        transaction: Transaction
-    ): LiveData<Either<Throwable, Resource<String>>> {
+    suspend fun getCancelTransactionLiveData(accessToken: AccessToken, account: Account, transaction: Transaction): LiveData<Either<Throwable, Resource<String>>> {
         val liveData: MutableLiveData<Either<Throwable, Resource<String>>> = MutableLiveData()
         liveData.postValue(Either.right(Resource.loading()))
 
         CoroutineScope(context = coroutineContext).launch {
             val request = CancelTransactionRequest(
-                cardId = transaction.cardId,
-                nsuHost = transaction.nsuHost,
-                nsuAuthorization = transaction.nsuAuthorization,
-                value = transaction.value,
-                dateTimeTransaction = LocalDateTime.now().format(),
-                terminalCode = account.password.decrypt(),
-                accreditedCode = account.terminal.accreditedCode,
-                dateTransactionCancel = transaction.transactionTimestamp.format()
+                    cardId = transaction.cardId,
+                    nsuHost = transaction.nsuHost,
+                    nsuAuthorization = transaction.nsuAuthorization,
+                    value = transaction.value,
+                    dateTimeTransaction = LocalDateTime.now().format(),
+                    terminalCode = account.password.decrypt(),
+                    accreditedCode = account.terminal.accreditedCode,
+                    dateTransactionCancel = transaction.transactionTimestamp.format()
             )
 
             val result: Either<Throwable, Resource<String>> = cancelTransaction(accessToken.formattedToken, request)
@@ -106,18 +92,72 @@ class TerminalRepository @Inject constructor(
         return liveData
     }
 
+    private suspend fun payWithCard(authorization: String, request: PayWithCardRequest): Either<Throwable, Resource<CardPayment>> {
+        return try {
+            val response = telenetService.payWithCard(authorization = authorization, request = request)
+            val transactionDate = response.results.authorizationDate?.toLocalDateTime() ?: LocalDateTime.now()
+
+            Either.right(
+                Resource.success(CardPayment(nsuHost = response.results.nsuHost, nsuAuthorization = response.results.nsuAuthorization, bearerName = response.results.bearerName, totalValue = response.results.totalValue, transactionDate = transactionDate))
+            )
+        } catch (ex: CancellationException) {
+            throw ex
+        } catch (ex: HttpException) {
+            val errorBodyResponse: ErrorBodyResponse? = moshi.responseError(ex.response())
+
+            if (ex.code() == 401) {
+                Either.left(InvalidAuthenticationException())
+            } else {
+                Either.right(Resource.error(message = errorBodyResponse?.message))
+            }
+        } catch (ex: EOFException) {
+            Either.left(ex)
+        } catch (ex: IOException) {
+            Either.left(ConnectionErrorException())
+        } catch (t: Throwable) {
+            Either.left(t)
+        }
+    }
+
+    private suspend fun payWithCardQRCode(authorization: String, request: PayWithCardQRCodeRequest): Either<Throwable, Resource<CardPayment>> {
+        return try {
+            var response = telenetService.payWithCardQRCode(authorization = authorization, request = request)
+            val transactionDate = response.results.authorizationDate?.toLocalDateTime() ?: LocalDateTime.now()
+
+            Either.right(
+                Resource.success(CardPayment(nsuHost = response.results.nsuHost, nsuAuthorization = response.results.nsuAuthorization, bearerName = response.results.bearerName, totalValue = response.results.totalValue, transactionDate = transactionDate))
+            )
+        } catch (ex: CancellationException) {
+            throw ex
+        } catch (ex: HttpException) {
+            val errorBodyResponse: ErrorBodyResponse? = moshi.responseError(ex.response())
+
+            if (ex.code() == 401) {
+                Either.left(InvalidAuthenticationException())
+            } else {
+                Either.right(Resource.error(message = errorBodyResponse?.message))
+            }
+        } catch (ex: EOFException) {
+            Either.left(ex)
+        } catch (ex: IOException) {
+            Either.left(ConnectionErrorException())
+        } catch (t: Throwable) {
+            Either.left(t)
+        }
+    }
+
     private suspend fun getBillingQrCode(
-        authorization: String,
-        request: QrCodeRequest
-    ): Either<Throwable, Resource<String>> {
+            authorization: String,
+            request: QrCodeRequest
+    ): Either<Throwable, Resource<QrCodePayment>> {
         return try {
             val response = telenetService.getBillingQrCode(authorization = authorization, request = request)
             val data = response.results
 
             Either.right(
-                Resource.success(
-                    data = data
-                )
+                    Resource.success(
+                            QrCodePayment(data.paymentToken, qrCode = data.qrCode)
+                    )
             )
         } catch (ex: CancellationException) {
             throw ex
@@ -137,32 +177,32 @@ class TerminalRepository @Inject constructor(
     }
 
     private suspend fun getTransactions(
-        authorization: String,
-        request: StatementListRequest
+            authorization: String,
+            request: StatementListRequest
     ): Either<Throwable, Resource<TransactionPeriodSummary>> {
         return try {
             val response = telenetService.getSyntheticStatement(
-                authorization = authorization,
-                request = request
+                    authorization = authorization,
+                    request = request
             )
 
             val transactionDailySummaryList = response.results.transactions.map { result ->
                 TransactionDailySummary(
-                    date = result.date.toLocalDateTime(),
-                    totalValue = result.value,
-                    transactions = result.totalTransactions
+                        date = result.date.toLocalDateTime(),
+                        totalValue = result.value,
+                        transactions = result.totalTransactions
                 )
             }
 
             Either.right(
-                Resource.success(
-                    TransactionPeriodSummary(
-                        period = "Últimos 30 dias",
-                        totalValue = response.results.totalTicketValue,
-                        averageTicketValue = response.results.averageTicketValue,
-                        dailySummaryList = transactionDailySummaryList
+                    Resource.success(
+                            TransactionPeriodSummary(
+                                    period = "Últimos 30 dias",
+                                    totalValue = response.results.totalTicketValue,
+                                    averageTicketValue = response.results.averageTicketValue,
+                                    dailySummaryList = transactionDailySummaryList
+                            )
                     )
-                )
             )
         } catch (ex: CancellationException) {
             throw ex
@@ -182,39 +222,39 @@ class TerminalRepository @Inject constructor(
     }
 
     private suspend fun getDayTransactions(
-        authorization: String,
-        request: AnalyticSatatementListRequest
+            authorization: String,
+            request: AnalyticSatatementListRequest
     ): Either<Throwable, Resource<AnalyticSummary>> {
         return try {
             val response = telenetService.getAnalyticStatement(
-                authorization = authorization,
-                request = request
+                    authorization = authorization,
+                    request = request
             )
 
             val transactions = response.results.transactions.map { result ->
                 Transaction(
-                    cardId=result.cardId,
-                    nsuHost = result.nsuHost,
-                    nsuAuthorization = result.nsuAuthorization,
-                    installments = result.installments,
-                    value = result.value,
-                    cardLastDigits = result.cardLastDigits,
-                    cardType = result.cardType,
-                    transactionTimestamp = result.transactionTimestamp.toLocalDateTime()
+                        cardId = result.cardId,
+                        nsuHost = result.nsuHost,
+                        nsuAuthorization = result.nsuAuthorization,
+                        installments = result.installments,
+                        value = result.value,
+                        cardLastDigits = result.cardLastDigits,
+                        cardType = result.cardType,
+                        transactionTimestamp = result.transactionTimestamp.toLocalDateTime()
                 )
             }
 
             Either.right(
-                Resource.success(
-                    AnalyticSummary(
-                        pageNumber = response.results.pageNumber,
-                        pageSize = response.results.pageSize,
-                        totalRecords = response.results.totalRecords,
-                        transactions = transactions,
-                        totalTicketValue = response.results.totalTicketValue,
-                        averageTicketValue = response.results.averageTicketValue
+                    Resource.success(
+                            AnalyticSummary(
+                                    pageNumber = response.results.pageNumber,
+                                    pageSize = response.results.pageSize,
+                                    totalRecords = response.results.totalRecords,
+                                    transactions = transactions,
+                                    totalTicketValue = response.results.totalTicketValue,
+                                    averageTicketValue = response.results.averageTicketValue
+                            )
                     )
-                )
             )
         } catch (ex: CancellationException) {
             throw ex
@@ -234,13 +274,13 @@ class TerminalRepository @Inject constructor(
     }
 
     private suspend fun cancelTransaction(
-        authorization: String,
-        request: CancelTransactionRequest
+            authorization: String,
+            request: CancelTransactionRequest
     ): Either<Throwable, Resource<String>> {
         return try {
             transactionService.cancelTransaction(
-                authorization = authorization,
-                request = request
+                    authorization = authorization,
+                    request = request
             )
 
             Either.right(Resource.success())

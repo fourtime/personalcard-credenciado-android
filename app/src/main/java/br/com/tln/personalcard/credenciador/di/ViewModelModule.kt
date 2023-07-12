@@ -18,9 +18,7 @@ package br.com.tln.personalcard.credenciador.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import br.com.tln.personalcard.credenciador.ui.billing.BillingInstallmentsViewModel
-import br.com.tln.personalcard.credenciador.ui.billing.BillingQrCodeViewModel
-import br.com.tln.personalcard.credenciador.ui.billing.BillingValueViewModel
+import br.com.tln.personalcard.credenciador.ui.billing.*
 import br.com.tln.personalcard.credenciador.ui.changepassword.ChangePasswordViewModel
 import br.com.tln.personalcard.credenciador.ui.home.HomeViewModel
 import br.com.tln.personalcard.credenciador.ui.initialization.InitializationCreatePasswordViewModel
@@ -85,6 +83,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BillingQrCodeViewModel::class)
     abstract fun bindBillingQrCodeViewModel(billingValueViewModel: BillingQrCodeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BillingQrCodeReaderViewModel::class)
+    abstract fun bindBillingQrCodeReaderViewModel(billingValueViewModel: BillingQrCodeReaderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BillingCardPaymentViewModel::class)
+    abstract fun bindBillingCardViewModel(billingCardViewModel: BillingCardPaymentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BillingPaymentSuccessViewModel::class)
+    abstract fun bindBillingPaymentSuccessViewModel(billingPaymentSuccessViewModel: BillingPaymentSuccessViewModel): ViewModel
 
     @Binds
     @IntoMap

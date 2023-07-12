@@ -3,6 +3,7 @@ package br.com.tln.personalcard.credenciador.ui.billing
 import androidx.navigation.navOptions
 import br.com.tln.personalcard.credenciador.R
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseNavigator
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
 import java.math.BigDecimal
 import javax.inject.Inject
 
@@ -60,13 +61,13 @@ class BillingInstallmentsNavigator @Inject constructor() : SessionRequiredBaseNa
         })
     }
 
-    fun navigateToQrCode(title: String, installments: Int, billingValue: BigDecimal) {
+    fun navigateToQrCode(cardType: PaymentMethod, installments: Int, billingValue: BigDecimal) {
         if (navController.currentDestination == null || navController.currentDestination?.id != R.id.billingInstallmentsFragment) {
             return
         }
 
         val directions = BillingInstallmentsFragmentDirections.actionBillingInstallmentsFragmentToBillingQrCodeFragment(
-            title = title,
+            cardType = cardType.id ?: 0,
             installments = installments,
             billingValue = billingValue.toString()
         )

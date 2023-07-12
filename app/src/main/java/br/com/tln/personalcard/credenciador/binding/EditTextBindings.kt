@@ -164,7 +164,7 @@ object EditTextBindings {
                     ) {
                     }
 
-                    override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
+                    override fun onTextChanged(maskFilled: Boolean, extractedValue: String, formattedValue: String) {
                         if (!maskBind) {
                             setTag(R.id.editTextMaskRawText, extractedValue)
                         }

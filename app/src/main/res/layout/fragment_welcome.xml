@@ -73,7 +73,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:layout_marginBottom="18dp"
                 android:background="@drawable/button_client"
                 android:fontFamily="@font/font_regular"
                 android:onClick="@{() -> viewModel.continueClicked()}"
@@ -81,7 +80,6 @@
                 android:textAllCaps="false"
                 android:textColor="@color/button_client"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/welcome_end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/welcome_start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />

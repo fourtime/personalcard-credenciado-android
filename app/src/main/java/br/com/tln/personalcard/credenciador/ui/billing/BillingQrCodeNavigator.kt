@@ -3,6 +3,8 @@ package br.com.tln.personalcard.credenciador.ui.billing
 import androidx.navigation.navOptions
 import br.com.tln.personalcard.credenciador.R
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseNavigator
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
+import java.math.BigDecimal
 import javax.inject.Inject
 
 class BillingQrCodeNavigator @Inject constructor() : SessionRequiredBaseNavigator() {
@@ -65,5 +67,34 @@ class BillingQrCodeNavigator @Inject constructor() : SessionRequiredBaseNavigato
         }
 
         navController.popBackStack(R.id.homeFragment, false)
+    }
+
+    fun navigateToCard(paymentToken: String, cardType: PaymentMethod, billingValue: BigDecimal, installments: Int) {
+        if (navController.currentDestination == null || navController.currentDestination?.id != R.id.billingQrCodeFragment) {
+            return
+        }
+
+        val directions = BillingQrCodeFragmentDirections.actionBillingQrCodeFragmentToBillingCardFragment(
+                cardType = cardType.id ?: 0,
+                paymentToken = paymentToken,
+                billingValue = billingValue.toString(),
+                installments = installments,
+            qrcodeToken = null
+        )
+        navController.navigate(directions)
+    }
+
+    fun navigateToCardReader(paymentToken: String, cardType: PaymentMethod, billingValue: BigDecimal, installments: Int) {
+        if (navController.currentDestination == null || navController.currentDestination?.id != R.id.billingQrCodeFragment) {
+            return
+        }
+
+        val directions = BillingQrCodeFragmentDirections.actionBillingQrCodeFragmentToBillingQrCodeReaderFragment(
+            paymentToken = paymentToken,
+            cardType = cardType.id ?: 0,
+            billingValue = billingValue.toString(),
+            installments = installments
+        )
+        navController.navigate(directions)
     }
 }

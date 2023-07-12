@@ -8,9 +8,125 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:507148760177:android:2004f72a50f0c38817d7d0",
+        "android_client_info": {
+          "package_name": "br.com.tln.personalcard.credenciador.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjFKX5XR0KHKBNYU7rvEPkwfh7MSkROmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507148760177:android:f8531776a512b78c",
+        "android_client_info": {
+          "package_name": "br.com.tln.credenciador.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjFKX5XR0KHKBNYU7rvEPkwfh7MSkROmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507148760177:android:1501ba92599755ef17d7d0",
+        "android_client_info": {
+          "package_name": "br.com.tln.eightcard.credenciador.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjFKX5XR0KHKBNYU7rvEPkwfh7MSkROmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:507148760177:android:a98a57becbffe28b17d7d0",
         "android_client_info": {
           "package_name": "br.com.tln.personalcard.credenciador.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjFKX5XR0KHKBNYU7rvEPkwfh7MSkROmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507148760177-rrsmd0m3ctooq709k5f4g78tdslks8iq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507148760177:android:87251f755dea5bfd17d7d0",
+        "android_client_info": {
+          "package_name": "br.com.tln.personalcard.credenciador"
         }
       },
       "oauth_client": [

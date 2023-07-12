@@ -2,16 +2,10 @@ package br.com.tln.personalcard.credenciador.webservice
 
 import br.com.tln.personalcard.credenciador.AUTHORIZATION_HEADER
 import br.com.tln.personalcard.credenciador.BuildConfig
-import br.com.tln.personalcard.credenciador.webservice.request.AnalyticSatatementListRequest
-import br.com.tln.personalcard.credenciador.webservice.request.QrCodeRequest
-import br.com.tln.personalcard.credenciador.webservice.request.SettingInstanceRequest
-import br.com.tln.personalcard.credenciador.webservice.request.StatementListRequest
-import br.com.tln.personalcard.credenciador.webservice.response.LoginResponse
-import br.com.tln.personalcard.credenciador.webservice.response.OperatorLinks
-import br.com.tln.personalcard.credenciador.webservice.response.SyntheticTransactionsResponse
-import br.com.tln.personalcard.credenciador.webservice.response.TelenetBaseResponse
-import br.com.tln.personalcard.credenciador.webservice.response.TerminalDataResponse
-import br.com.tln.personalcard.credenciador.webservice.response.TransactionResponse
+import br.com.tln.personalcard.credenciador.model.CardPayment
+import br.com.tln.personalcard.credenciador.model.QrCodePayment
+import br.com.tln.personalcard.credenciador.webservice.request.*
+import br.com.tln.personalcard.credenciador.webservice.response.*
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -46,11 +40,23 @@ interface TelenetService {
         @Path("operatorCode") operatorCode: String = BuildConfig.OPERATOR_CODE
     ): TelenetBaseResponse<OperatorLinks>
 
-    @POST("services/transacao/cartao/geraqrcodepagamento")
+    @POST("services/transacao/cartao/pagamentoviacartaodigitado")
+    suspend fun payWithCard(
+            @Header(AUTHORIZATION_HEADER) authorization: String,
+            @Body request: PayWithCardRequest
+    ): TelenetBaseResponse<CardPaymentResponse>
+
+    @POST("services/transacao/cartao/pagamentoviaqrcodecartao")
+    suspend fun payWithCardQRCode(
+        @Header(AUTHORIZATION_HEADER) authorization: String,
+        @Body request: PayWithCardQRCodeRequest
+    ): TelenetBaseResponse<CardPaymentResponse>
+
+    @POST("services/transacao/cartao/geraqrcodepagamento2")
     suspend fun getBillingQrCode(
         @Header(AUTHORIZATION_HEADER) authorization: String,
         @Body request: QrCodeRequest
-    ): TelenetBaseResponse<String>
+    ): TelenetBaseResponse<QrCodePaymentResponse>
 
     @POST("services/consulta/credenciado/extratosinteticoterminal")
     suspend fun getSyntheticStatement(

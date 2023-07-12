@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="br.com.tln.personalcard.credenciador">
 
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".TelenetApp"
@@ -13,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
+        tools:replace="android:allowBackup">
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -15,6 +15,7 @@
     <color name="telenetColorOnPrimary">#ffffff</color>
     <color name="telenetColorOnSecondary">#45484a</color>
     <color name="telenetColorOnBackground">#45484a</color>
+    <color name="telenetLightColorOnBackground">#757575</color>
     <color name="telenetColorOnSurface">#45484a</color>
     <color name="telenetColorOnError">#ffffff</color>
 
@@ -23,9 +24,13 @@
     <color name="telenetColorExtra2">#7bab39</color>
     <color name="telenetColorExtra3">#757575</color>
     <color name="telenetColorExtra4">#212121</color>
+    <color name="telenetColorExtra5">#219653</color>
 
     <color name="telenetColorOnExtra1">#346632</color>
     <color name="telenetColorOnExtra2">#ffffff</color>
+
+    <color name="telenetColorBillingPaymentSuccessFrame">#FBFCF9</color>
+    <color name="telenetColorBillingPaymentSuccessFrameBorder">#E7F0DC</color>
 
     <!-- Dialog -->
     <color name="telenetDialogDimColor">#66000000</color>

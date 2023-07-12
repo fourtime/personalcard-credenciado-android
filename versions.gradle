@@ -40,15 +40,17 @@ versions.moshi = "1.13.0"
 versions.ok_http = "3.12.1"
 versions.retrofit = "2.6.0"
 versions.arrow = "0.8.2"
-versions.inputmask = "4.0.0"
-versions.debugDb = "1.0.5"
-versions.topsnackbar = "1.1.1"
+versions.inputmask = "6.0.0"
+versions.debugDb = "1.0.4"
+versions.topsnackbar = "V2.0.0"
+versions.permissiondispatcher = "4.9.2"
+versions.uicomponents_zxing = "1.9.8"
 
 ext.build_versions = [:]
 def build_versions = [:]
 build_versions.min_sdk = 21
-build_versions.target_sdk = 31
-build_versions.compile_sdk = 32
+build_versions.target_sdk = 33
+build_versions.compile_sdk = 33
 build_versions.build_tools = "30.0.2"
 ext.build_versions = build_versions
 
@@ -75,7 +77,7 @@ deps.play_services_basement = "com.google.android.gms:play-services-basement:$ve
 deps.crashlytics = "com.google.firebase:firebase-crashlytics-ktx:$versions.crashlytics"
 deps.threetenabp = "com.jakewharton.threetenabp:threetenabp:$versions.threetenabp"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
-deps.inputmask = "com.redmadrobot:inputmask:${versions.inputmask}"
+deps.inputmask = "com.redmadrobot:input-mask-android:${versions.inputmask}"
 
 def firebase = [:]
 firebase.core = "com.google.firebase:firebase-core:$versions.firebase_core"
@@ -160,7 +162,14 @@ def arrow = [:]
 arrow.core = "io.arrow-kt:arrow-core:$versions.arrow"
 deps.arrow = arrow
 
-deps.topsnackbar = "com.androidadvance:topsnackbar:$versions.topsnackbar"
+deps.topsnackbar = "com.github.Redman1037:TSnackBar:$versions.topsnackbar"
+
+deps.zxing = "me.dm7.barcodescanner:zxing:$versions.uicomponents_zxing"
+
+def permissiondispatcher = [:]
+permissiondispatcher.core = "com.github.permissions-dispatcher:permissionsdispatcher:$versions.permissiondispatcher"
+permissiondispatcher.processor =  "com.github.permissions-dispatcher:permissionsdispatcher-processor:$versions.permissiondispatcher"
+deps.permissiondispatcher = permissiondispatcher
 
 def dev = [:]
 dev.debugDb = "com.amitshekhar.android:debug-db:$versions.debugDb"
@@ -170,9 +179,11 @@ ext.deps = deps
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()
+    handler.mavenCentral()
     handler.jcenter()
     handler.maven {
         url "https://oss.sonatype.org/content/repositories/snapshots"
+        url 'https://jitpack.io'
     }
 }
 

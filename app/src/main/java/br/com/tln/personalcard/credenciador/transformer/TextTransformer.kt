@@ -34,8 +34,7 @@ class TextTransformer {
     fun mask(value: String?, mask: String): String? {
         return value?.let {
             Mask(mask).apply(
-                text = CaretString(value, value.length),
-                autocomplete = false
+                text = CaretString(value, value.length, caretGravity = CaretString.CaretGravity.FORWARD(autocompleteValue = false))
             ).formattedText.string
         }
     }

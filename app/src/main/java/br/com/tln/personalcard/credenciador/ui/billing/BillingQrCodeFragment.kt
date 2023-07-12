@@ -11,8 +11,10 @@ import br.com.tln.personalcard.credenciador.core.HasToolbar
 import br.com.tln.personalcard.credenciador.core.Resource
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseFragment
 import br.com.tln.personalcard.credenciador.databinding.FragmentBillingQrCodeBinding
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
 import br.com.tln.personalcard.credenciador.extensions.hideSoftKeyboard
 import br.com.tln.personalcard.credenciador.extensions.observe
+import br.com.tln.personalcard.credenciador.model.QrCodePayment
 import br.com.tln.personalcard.credenciador.transformer.TextTransformer
 import com.bumptech.glide.Glide
 
@@ -34,6 +36,7 @@ class BillingQrCodeFragment : SessionRequiredBaseFragment<FragmentBillingQrCodeB
         binding.textTransformer = TextTransformer()
         binding.viewModel = viewModel
 
+        viewModel.setCardType(PaymentMethod.fromId(args.cardType) ?: PaymentMethod.PRE_PAID_CARD)
         viewModel.setBillingValue(args.billingValue.toBigDecimal())
         viewModel.setInstallments(args.installments)
 
@@ -78,10 +81,12 @@ class BillingQrCodeFragment : SessionRequiredBaseFragment<FragmentBillingQrCodeB
         binding.error = true
     }
 
-    private fun showData(data: String) {
+    private fun showData(data: QrCodePayment) {
         binding.error = false
 
-        val imageByteArray = Base64.decode(data, Base64.DEFAULT)
+        viewModel.paymentToken.postValue(data.paymentToken)
+
+        val imageByteArray = Base64.decode(data.qrCode, Base64.DEFAULT)
 
         Glide.with(this)
             .load(imageByteArray)

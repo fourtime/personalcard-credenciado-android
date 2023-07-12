@@ -9,6 +9,8 @@ import br.com.tln.personalcard.credenciador.R
 import br.com.tln.personalcard.credenciador.core.HasToolbar
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseFragment
 import br.com.tln.personalcard.credenciador.databinding.FragmentBillingValueBinding
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
+import kotlinx.android.synthetic.main.fragment_billing_value.*
 
 class BillingValueFragment : SessionRequiredBaseFragment<FragmentBillingValueBinding, BillingValueViewModel>(
     layoutRes = R.layout.fragment_billing_value,
@@ -20,7 +22,13 @@ class BillingValueFragment : SessionRequiredBaseFragment<FragmentBillingValueBin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.viewModel = viewModel
 
-        viewModel.setTitle(args.title)
+        val cardType = PaymentMethod.fromId(args.cardType) ?: PaymentMethod.PRE_PAID_CARD
+        when(cardType) {
+            PaymentMethod.PRE_PAID_CARD -> this.toolbar.setTitle(getString(R.string.home_pre_paid_card))
+            PaymentMethod.POST_PAID_CARD -> this.toolbar.setTitle(getString(R.string.home_post_paid_card))
+            PaymentMethod.FLEET_CARD -> this.toolbar.setTitle(getString(R.string.home_fleet_card))
+        }
+        viewModel.setCardType(cardType)
         viewModel.setMaxInstallments(args.maxInstallments)
     }
 

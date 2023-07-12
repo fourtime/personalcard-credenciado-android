@@ -181,6 +181,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
+                    android:id="@+id/showCode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -188,10 +189,43 @@
                     android:text="@string/billing_qr_code_show_qr_code"
                     android:textColor="@color/telenetColorOnSurface"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/billing_qr_code_qr_code_container_bottom_guideline"
+                    app:layout_constraintBottom_toTopOf="@+id/showCardPayment"
                     app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_qr_code_container_end_guideline"
                     app:layout_constraintStart_toStartOf="@+id/billing_qr_code_qr_code_container_start_guideline"
                     app:layout_constraintTop_toBottomOf="@+id/billingQrCodeQrCode" />
+
+                <TextView
+                    android:id="@+id/readCardData"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:text="@string/billing_qr_code_read_card_data"
+                    android:textColor="@color/telenetColorOnSurface"
+                    android:textSize="12sp"
+                    android:onClick="@{() -> viewModel.readCardData()}"
+                    app:visible="@{viewModel.showReadCardOption}"
+                    app:layout_constraintTop_toBottomOf="@+id/showCode"
+                    app:layout_constraintBottom_toBottomOf="@+id/billing_qr_code_qr_code_container_bottom_guideline"
+                    app:layout_constraintEnd_toStartOf="@+id/showCardPayment"
+                    app:layout_constraintStart_toStartOf="@+id/billing_qr_code_qr_code_container_start_guideline" />
+
+                <TextView
+                    android:id="@+id/showCardPayment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@string/billing_qr_code_show_card_payment"
+                    android:textColor="@color/telenetColorOnSurface"
+                    android:textSize="12sp"
+                    android:onClick="@{() -> viewModel.navigateToCardPayment()}"
+                    app:visible="@{viewModel.showCardPaymentOption}"
+                    app:layout_constraintTop_toBottomOf="@+id/showCode"
+                    app:layout_constraintBottom_toBottomOf="@+id/billing_qr_code_qr_code_container_bottom_guideline"
+                    app:layout_constraintEnd_toEndOf="@+id/billing_qr_code_qr_code_container_end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/readCardData" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/billing_qr_code_qr_code_container_start_guideline"

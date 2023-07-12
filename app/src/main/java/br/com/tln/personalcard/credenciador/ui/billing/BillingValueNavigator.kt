@@ -3,6 +3,7 @@ package br.com.tln.personalcard.credenciador.ui.billing
 import androidx.navigation.navOptions
 import br.com.tln.personalcard.credenciador.R
 import br.com.tln.personalcard.credenciador.core.SessionRequiredBaseNavigator
+import br.com.tln.personalcard.credenciador.entity.PaymentMethod
 import java.math.BigDecimal
 import javax.inject.Inject
 
@@ -60,27 +61,27 @@ class BillingValueNavigator @Inject constructor() : SessionRequiredBaseNavigator
         })
     }
 
-    fun navigateToChooseInstallments(title: String, billingValue: BigDecimal, maxInstallments: Int) {
+    fun navigateToChooseInstallments(cardType: PaymentMethod, billingValue: BigDecimal, maxInstallments: Int) {
         if (navController.currentDestination == null || navController.currentDestination?.id != R.id.billingValueFragment) {
             return
         }
 
         val directions = BillingValueFragmentDirections.actionBillingValueFragmentToBillingInstallmentsFragment(
-            title = title,
+            cardType = cardType.id ?: 0,
             billingValue = billingValue.toString(),
             maxInstallments = maxInstallments
         )
         navController.navigate(directions)
     }
 
-    fun navigateToQrCode(title: String, billingValue: BigDecimal, installments: Int) {
+    fun navigateToQrCode(cardType: PaymentMethod, billingValue: BigDecimal, installments: Int) {
         if (navController.currentDestination == null || navController.currentDestination?.id != R.id.billingValueFragment) {
             return
         }
 
         val directions =
             BillingValueFragmentDirections.actionBillingValueFragmentToBillingQrCodeFragment(
-                title = title,
+                cardType = cardType.id ?: 0,
                 billingValue = billingValue.toString(),
                 installments = installments
             )
