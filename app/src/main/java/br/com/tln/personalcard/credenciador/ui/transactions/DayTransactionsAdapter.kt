@@ -68,7 +68,7 @@ class DayTransactionsAdapter(
                 binding.itemDayTransactionCancelProgress.visibility = View.VISIBLE
             } else {
                 binding.itemDayTransactionCancelProgress.visibility = View.GONE
-                binding.itemDayTransactionCancel.visibility = View.VISIBLE
+                binding.itemDayTransactionCancel.visibility = if (item.cardId.trim() == "") View.GONE else View.VISIBLE
 
             }
 
